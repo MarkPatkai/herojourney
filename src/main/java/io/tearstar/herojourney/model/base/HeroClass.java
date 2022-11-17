@@ -1,20 +1,55 @@
 package io.tearstar.herojourney.model.base;
 
-import lombok.Getter;
+import io.tearstar.herojourney.model.core.AbstractAttributeHolder;
+import io.tearstar.herojourney.model.core.AttributeName;
+import lombok.*;
 
-public enum HeroClass {
+import javax.persistence.*;
 
-    WARRIOR("Warrior"),
-    MAGE("Mage"),
-    ASSASSIN("Assassin");
+@EqualsAndHashCode(callSuper = true)
+@Data
+@Entity
+@Table(name = "HEROCLASS")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class HeroClass extends AbstractAttributeHolder {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Getter
-    private String label;
+    private String name;
 
-    HeroClass(String label) {
-        this.label = label;
+    private Integer str;
+
+    private Integer dex;
+
+    private Integer mnd;
+
+    private Integer vit;
+
+    private AttributeName scala;
+
+    private AttributeName scala_snd;
+
+    @Override
+    public AttributeName scalaMod() {
+        return scala;
     }
 
+    @Override
+    public AttributeName scalaSnd() {
+        return scala_snd;
+    }
 
+    @Override
+    public int getScalaMod() {
+        return super.getByAttribute(scalaMod());
+    }
+
+    @Override
+    public int getScalaSndMod() {
+        return super.getByAttribute(scalaSnd());
+    }
 }

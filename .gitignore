@@ -35,4 +35,8 @@ out/
 
 ### VS Code ###
 .vscode/
->>>>>>> 22b8b71 (#0 Code Commit)
+
+## Gradle
+gradlew.bat
+gradlew
+/gradle/
