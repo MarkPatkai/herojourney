@@ -1,5 +1,6 @@
 package io.tearstar.herojourney.model.base;
 
+import io.tearstar.herojourney.model.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,6 +32,10 @@ public class Hero {
 
     private Integer vit = 2;
 
-    public HeroClass heroClass;
+    private HeroClass heroClass;
+
+    @ManyToOne
+    @JoinColumn(name = "ownerId")
+    private User owner;
 
 }
