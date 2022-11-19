@@ -6,7 +6,8 @@ export default {
         token: ''
     },
     getters: {
-        getToken: (state) => state.token
+        getToken: (state) => state.token,
+        isLoggedIn: (state) => !!state.token
     },
     mutations: {
         setToken(state, token) {
@@ -14,20 +15,17 @@ export default {
         }
     },
     actions: {
-        login({commit}, user) {
-            return new Promise((resolve, reject) => {
-                http.post('/HeroJourney/auth/', user)
+        async login({commit}, user) {
+            await http.post('/HeroJourney/auth/', user)
                     .then(response => {
-                        const token = response.data.token
+                        const token = response.data;
                         localStorage.setItem('token', token)
                         commit('setToken', token)
-                        resolve(response)
                     })
                     .catch(error => {
                         localStorage.removeItem('token')
-                        reject(error)
+                        console.log(error)
                     })
-            });
         }
     },
     modules: {
