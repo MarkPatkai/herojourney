@@ -9,7 +9,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-@Table(name = "HEROCLASS")
+@Table(name = "HERO_CLASS")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -21,13 +21,13 @@ public class HeroClass extends AbstractAttributeHolder {
 
     private String name;
 
-    private Integer str;
+    private int str;
 
-    private Integer dex;
+    private int dex;
 
-    private Integer mnd;
+    private int mnd;
 
-    private Integer vit;
+    private int vit;
 
     private AttributeName scala;
 

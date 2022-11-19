@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "USERHERO")
+@Table(name = "USER_HERO")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,11 +20,11 @@ public class UserHero {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "userId")
     public User user;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "heroId")
     public Hero hero;
 }

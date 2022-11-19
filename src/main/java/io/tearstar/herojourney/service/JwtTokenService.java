@@ -34,7 +34,7 @@ public class JwtTokenService extends OncePerRequestFilter {
 
     private static final long EXP_DATE = 1270000;
 
-    @Value("${herojourney.jwtSecret:herojourney}")
+    @Value("${hero-journey.jwtSecret}")
     private String jwtSecret;
 
     public JwtTokenService(UserService userService) {
@@ -43,37 +43,49 @@ public class JwtTokenService extends OncePerRequestFilter {
 
     public String authenticate(@NonNull User user) throws AuthException {
         User usr = userService.findUser(user);
+        if (usr == null) {
+            throw new AuthException("User not found");
+        }
 
-        return Jwts.builder()
-                .setSubject(usr.getUserId())
-                .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date().getTime() + EXP_DATE)))
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
-                .compact();
+        return generateToken(usr);
     }
 
-    public boolean validateJwtToken(String authToken) {
+    public String generateToken(User user) {
+        Date now = new Date();
+        Date expiryDate = new Date(now.getTime() + EXP_DATE);
+        return Jwts.builder()
+                .setSubject(user.getUserId().toString())
+                .setIssuedAt(new Date())
+                .setExpiration(expiryDate)
+                .signWith(SignatureAlgorithm.HS256, jwtSecret)
+                .compact();
+    }
+    public String getUserIdFromToken(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(jwtSecret)
+                .parseClaimsJws(token)
+                .getBody();
+        return claims.getSubject();
+    }
+
+    public boolean validateToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
             return true;
-        } catch (SignatureException e) {
-            log.error("Invalid JWT signature: {}", e.getMessage());
-        } catch (MalformedJwtException e) {
-            log.error("Invalid JWT token: {}", e.getMessage());
-        } catch (ExpiredJwtException e) {
-            log.error("JWT token is expired: {}", e.getMessage());
-        } catch (UnsupportedJwtException e) {
-            log.error("JWT token is unsupported: {}", e.getMessage());
-        } catch (IllegalArgumentException e) {
-            log.error("JWT claims string is empty: {}", e.getMessage());
+        } catch (SignatureException ex) {
+            log.error("Invalid JWT signature");
+        } catch (MalformedJwtException ex) {
+            log.error("Invalid JWT token");
+        } catch (ExpiredJwtException ex) {
+            log.error("Expired JWT token");
+        } catch (UnsupportedJwtException ex) {
+            log.error("Unsupported JWT token");
+        } catch (IllegalArgumentException ex) {
+            log.error("JWT claims string is empty.");
         }
-
         return false;
     }
 
-    private String getUsername(String jwt) {
-        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(jwt).getBody().getSubject();
-    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -84,14 +96,14 @@ public class JwtTokenService extends OncePerRequestFilter {
         }
         // Get jwt token and validate
         final String token = header.split(" ")[1].trim();
-        if (!validateJwtToken(token)) {
+        if (!validateToken(token)) {
             filterChain.doFilter(request, response);
             return;
         }
 
         User usr = null;
         try {
-            usr = userService.findUserByName(getUsername(token));
+            usr = userService.findUserByName(getUserIdFromToken(token));
         } catch (AuthException e) {
             e.printStackTrace();
         }

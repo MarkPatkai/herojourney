@@ -5,8 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "HERO_DETAIL")
@@ -15,6 +14,11 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HeroDetails {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     //TODO: Inventory (Id list), Resistances (base), Equipment, LearnedSpells (ID list)
 
 }
