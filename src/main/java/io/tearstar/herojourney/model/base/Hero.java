@@ -22,7 +22,7 @@ public class Hero {
 
     private String name;
 
-    private int level;
+    private int level = 1;
 
     private int str = 2;
 
@@ -33,11 +33,11 @@ public class Hero {
     private int vit = 2;
 
     @ManyToOne
-    @JoinColumn(name = "heroClassId")
+    @JoinColumn(name = "hero_class_id")
     private HeroClass heroClass;
 
     @ManyToOne
-    @JoinColumn(name = "ownerId")
+    @JoinColumn(name = "owner_id")
     private User owner;
 
 }

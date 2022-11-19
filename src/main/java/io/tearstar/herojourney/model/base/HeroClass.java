@@ -29,27 +29,4 @@ public class HeroClass extends AbstractAttributeHolder {
 
     private int vit;
 
-    private AttributeName scala;
-
-    private AttributeName scala_snd;
-
-    @Override
-    public AttributeName scalaMod() {
-        return scala;
-    }
-
-    @Override
-    public AttributeName scalaSnd() {
-        return scala_snd;
-    }
-
-    @Override
-    public int getScalaMod() {
-        return super.getByAttribute(scalaMod());
-    }
-
-    @Override
-    public int getScalaSndMod() {
-        return super.getByAttribute(scalaSnd());
-    }
 }

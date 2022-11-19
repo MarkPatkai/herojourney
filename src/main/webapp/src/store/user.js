@@ -19,11 +19,11 @@ export default {
             await http.post('/HeroJourney/auth/', user)
                     .then(response => {
                         const token = response.data;
-                        localStorage.setItem('token', token)
+                        sessionStorage.setItem('token', token)
                         commit('setToken', token)
                     })
                     .catch(error => {
-                        localStorage.removeItem('token')
+                        sessionStorage.removeItem('token')
                         console.log(error)
                     })
         }

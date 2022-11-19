@@ -1,11 +1,15 @@
 package io.tearstar.herojourney.service;
 
 import io.tearstar.herojourney.model.base.Hero;
+import io.tearstar.herojourney.model.base.HeroClass;
+import io.tearstar.herojourney.model.repository.HeroClassRepository;
 import io.tearstar.herojourney.model.repository.HeroRepository;
 import io.tearstar.herojourney.model.request.UserHeroRequest;
 import io.tearstar.herojourney.model.user.User;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,9 +23,12 @@ public class HeroService {
     private HeroRepository heroRepository;
     private UserService userService;
 
-    public HeroService(HeroRepository heroRepository, UserService userService) {
+    private HeroClassRepository heroClassRepository;
+
+    public HeroService(HeroRepository heroRepository, UserService userService, HeroClassRepository heroClassRepository) {
         this.heroRepository = heroRepository;
         this.userService = userService;
+        this.heroClassRepository = heroClassRepository;
     }
 
     public List<Hero> getHeroesByUser(@NonNull User user) {
@@ -29,12 +36,16 @@ public class HeroService {
         return heroRepository.findByOwner(user);
     }
 
-    public Hero createHero(@NonNull UserHeroRequest userHeroRequest) {
-        requireNonNull(userHeroRequest.getUser().getId());
-        User userById = userService.getUserById(userHeroRequest.getUser().getId());
-        requireNonNull(userById);
-        userHeroRequest.getHero().setOwner(userById);
-        log.info("Creating Hero({}) for User({})", userHeroRequest.getHero().toString(), userById.getUserId());
-        return heroRepository.save(userHeroRequest.getHero());
+    public Hero createHero(@NonNull Hero hero) {
+        log.info("Creating hero: {}", hero);
+        SecurityContext context = SecurityContextHolder.getContext();
+        log.info("User: {}", context.getAuthentication());
+        User user = (User) context.getAuthentication().getPrincipal();
+        hero.setOwner(user);
+        return heroRepository.save(hero);
+    }
+
+    public List<HeroClass> getHeroClasses() {
+        return heroClassRepository.findAll();
     }
 }

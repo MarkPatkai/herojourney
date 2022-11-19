@@ -12,12 +12,16 @@ const http = axios.create({
 
 http.interceptors.request.use(
     config => {
-        const token = store.getters.getToken;
+        let token = store.getters.getToken;
         if (token) {
+            config.headers['Authorization'] = `Bearer ${token}`;
+            return config;
+        }
+        token = sessionStorage.getItem('token');
+        if(token) {
             config.headers['Authorization'] = `Bearer ${token}`;
         }
         return config;
-    }
-);
+});
 
 export default http

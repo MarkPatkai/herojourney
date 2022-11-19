@@ -42,9 +42,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         })).and();
 
         http.authorizeHttpRequests()
-                .antMatchers("/HeroJourney/**").permitAll()
-                .antMatchers("/HeroJorney/auth").permitAll()
-                .antMatchers("/HeroJourney/user").permitAll()
                 .anyRequest().permitAll();
 
         http.addFilterBefore(

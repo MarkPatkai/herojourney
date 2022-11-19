@@ -19,13 +19,16 @@ export default {
       password: ""
     };
   },
+  mounted() {
+    this.$store.dispatch("login_screen", true);
+  },
   methods: {
     async login() {
         await this.$store.dispatch("login", {
           userId: this.userId,
           password: this.password
         });
-
+        this.$store.dispatch("login_screen", false);
         this.$router.push("/home");
     }
   }

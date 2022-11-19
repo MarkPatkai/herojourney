@@ -54,7 +54,7 @@ public class JwtTokenService extends OncePerRequestFilter {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + EXP_DATE);
         return Jwts.builder()
-                .setSubject(user.getUserId().toString())
+                .setSubject(user.getUserId())
                 .setIssuedAt(new Date())
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS256, jwtSecret)
@@ -86,11 +86,11 @@ public class JwtTokenService extends OncePerRequestFilter {
         return false;
     }
 
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         final String header = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (isEmpty(header) || !header.startsWith("Bearer ")) {
+            log.error("No JWT token found in request headers");
             filterChain.doFilter(request, response);
             return;
         }
@@ -98,6 +98,7 @@ public class JwtTokenService extends OncePerRequestFilter {
         final String token = header.split(" ")[1].trim();
         if (!validateToken(token)) {
             filterChain.doFilter(request, response);
+            log.error("Invalid token!");
             return;
         }
 
@@ -105,7 +106,9 @@ public class JwtTokenService extends OncePerRequestFilter {
         try {
             usr = userService.findUserByName(getUserIdFromToken(token));
         } catch (AuthException e) {
-            e.printStackTrace();
+            log.error("User not found!");
+            filterChain.doFilter(request, response);
+            return;
         }
 
 
@@ -123,6 +126,5 @@ public class JwtTokenService extends OncePerRequestFilter {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         filterChain.doFilter(request, response);
-
     }
 }
