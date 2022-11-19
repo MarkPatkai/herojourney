@@ -24,6 +24,8 @@ public class Hero {
 
     private int level = 1;
 
+    private int exp;
+
     private int str = 2;
 
     private int dex = 2;
@@ -39,5 +41,6 @@ public class Hero {
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private User owner;
+
 
 }

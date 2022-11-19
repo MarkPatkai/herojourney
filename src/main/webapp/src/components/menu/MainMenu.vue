@@ -1,22 +1,31 @@
 <template>
   <div>
-    <Menu v-if="isGameView" :model="items" />
+    <Menubar style="max-height:3.5rem; margin-bottom: 2rem;" v-if="isGameView" :model="items" />
   </div>
 </template>
 
 <script>
-import Menu from "primevue/menu";
+import Menubar from "primevue/menubar";
 export default {
   name: "MainMenu",
   components: {
-    Menu,
+    Menubar,
   },
   data() {
     return {
       items: [
         {
+          label: "Game",
+          icon: "pi pi-fw pi-file",
+          visible: () => this.$route.path !== "/game",
+          command: () => this.$router.push("/game"),
+        },
+        {
           label: "Profile",
           icon: "pi pi-fw pi-user",
+          command: () => {
+            this.$router.push("/game/profile");
+          },
         },
         {
           label: "Hero Selection",

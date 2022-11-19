@@ -4,7 +4,6 @@ import io.tearstar.herojourney.model.base.Hero;
 import io.tearstar.herojourney.model.base.HeroClass;
 import io.tearstar.herojourney.model.repository.HeroClassRepository;
 import io.tearstar.herojourney.model.repository.HeroRepository;
-import io.tearstar.herojourney.model.request.UserHeroRequest;
 import io.tearstar.herojourney.model.user.User;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +41,10 @@ public class HeroService {
         log.info("User: {}", context.getAuthentication());
         User user = (User) context.getAuthentication().getPrincipal();
         hero.setOwner(user);
+        hero.setDex(hero.getDex() + hero.getHeroClass().getDex());
+        hero.setStr(hero.getStr() + hero.getHeroClass().getStr());
+        hero.setVit(hero.getVit() + hero.getHeroClass().getVit());
+        hero.setMnd(hero.getMnd() + hero.getHeroClass().getMnd());
         return heroRepository.save(hero);
     }
 

@@ -4,7 +4,6 @@ import io.tearstar.herojourney.model.base.Hero;
 import io.tearstar.herojourney.model.base.HeroClass;
 import io.tearstar.herojourney.model.exceptions.AuthException;
 import io.tearstar.herojourney.model.exceptions.ExceptionMessage;
-import io.tearstar.herojourney.model.request.UserHeroRequest;
 import io.tearstar.herojourney.model.user.User;
 import io.tearstar.herojourney.service.HeroService;
 import io.tearstar.herojourney.service.UserService;

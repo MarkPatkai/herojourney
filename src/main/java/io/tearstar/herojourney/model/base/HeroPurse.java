@@ -8,18 +8,23 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "HERO_DETAIL")
+@Table(name = "HERO_PURSE")
 @Data
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class HeroDetails {
+@NoArgsConstructor
+@Builder
+public class HeroPurse {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //TODO: Inventory (Id list), Resistances (base), Equipment, LearnedSpells (ID list)
+    private int gold = 100;
 
+    private int crystal;
 
+    private int heavenCoin;
+
+    @OneToOne(mappedBy = "hero_id")
+    private Hero owner;
 }

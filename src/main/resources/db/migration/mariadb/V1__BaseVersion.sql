@@ -17,6 +17,7 @@ create table hero_class (
 create table heroes (
     id bigint not null auto_increment primary key,
     name varchar(255) not null,
+    exp int not null,
     level int not null,
     mnd int,
     str int,
@@ -47,6 +48,16 @@ create table user_hero (
     constraint `fk_user` foreign key (user_id) references user(id),
     constraint `fk_hero` foreign key (hero_id) references heroes(id)
 );
+
+create table user_purse (
+    id bigint not null auto_increment primary key,
+    hero_id bigint not null unique,
+    gold int not null,
+    crystal int not null,
+    heaven_coin int not null,
+    constraint `fk_user` foreign key (hero_id) references user(id)
+);
+)
 
 insert into user (user_id, password, salt)
 values ('test', '$2a$10$t5E0Y56ITsUGWjHKVIgcFOS0AiLCW6upUkSOp/DtXq4gLHf/X/NAO', '$2a$10$t5E0Y56ITsUGWjHKVIgcFO');

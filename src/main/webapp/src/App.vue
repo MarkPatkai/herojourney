@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <div class="layout">
-      <div class="layout-sidebar">
+      <div class="">
         <MainMenu />
       </div>
       <div class="layout-content">
