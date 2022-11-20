@@ -27,6 +27,10 @@ public class User {
     @JsonIgnore
     private String salt;
 
+    @ManyToOne
+    @JoinColumn(name = "USER_ROLE_ID")
+    private UserRole role;
+
     @Override
     public String toString() {
         return "User{" +

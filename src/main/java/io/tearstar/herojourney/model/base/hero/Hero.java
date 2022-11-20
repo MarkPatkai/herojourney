@@ -1,4 +1,4 @@
-package io.tearstar.herojourney.model.base;
+package io.tearstar.herojourney.model.base.hero;
 
 import io.tearstar.herojourney.model.user.User;
 import lombok.AllArgsConstructor;

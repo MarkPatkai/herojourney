@@ -1,6 +1,11 @@
 <template>
   <div>
-    <Menubar style="max-height:3.5rem; margin-bottom: 2rem;" v-if="isGameView" :model="items" />
+    <div v-show="isGameView">
+      <Menubar style="max-height:3.5rem; margin-bottom: 2rem;"  :model="items" />
+    </div>
+    <div  v-show="isAdminView" >
+      <Menubar style="max-height:3.5rem; margin-bottom: 2rem;" :model="adminItems" />
+    </div>
   </div>
 </template>
 
@@ -36,14 +41,34 @@ export default {
             this.$store.dispatch("selectHero", null);
             this.$router.push("/home");
           },
+        },
+        {
+          label: "Admin Dashboard",
+          icon: "pi pi-fw pi-cog",
+          visible: () => this.$store.getters.isAdmin,
+          command: () => {
+            this.$router.push("/admin");
+          },
+        }
+      ],
+      adminItems: [
+        {
+          label: "Go back to game",
+          icon: "pi pi-fw pi-cog",
+          command: () => {
+            this.$router.push("/game");
+          },
         }
       ]
     }
   },
   computed: {
     isGameView() {
-      return this.$store.getters.isGameView;
+      return this.$route.path === "/game" && !this.isAdminView;
     },
+    isAdminView() {
+      return this.$route.path === "/admin" && !this.isGameView;
+    }
   }
 }
 </script>

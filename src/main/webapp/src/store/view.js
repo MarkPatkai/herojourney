@@ -11,6 +11,7 @@ export default {
         isGameView: (state) => state.hero_selection === false
             && state.hero_creation === false
             && state.login_screen === false,
+
     },
     mutations: {
         setHeroSelection(state, hero_selection) {

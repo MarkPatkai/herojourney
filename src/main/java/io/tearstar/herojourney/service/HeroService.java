@@ -1,7 +1,7 @@
 package io.tearstar.herojourney.service;
 
-import io.tearstar.herojourney.model.base.Hero;
-import io.tearstar.herojourney.model.base.HeroClass;
+import io.tearstar.herojourney.model.base.hero.Hero;
+import io.tearstar.herojourney.model.base.hero.HeroClass;
 import io.tearstar.herojourney.model.repository.HeroClassRepository;
 import io.tearstar.herojourney.model.repository.HeroRepository;
 import io.tearstar.herojourney.model.user.User;

@@ -1,8 +1,8 @@
 package io.tearstar.herojourney.model.response;
 
-import io.tearstar.herojourney.model.base.Hero;
-import io.tearstar.herojourney.model.base.HeroDetails;
-import io.tearstar.herojourney.model.base.HeroPurse;
+import io.tearstar.herojourney.model.base.hero.Hero;
+import io.tearstar.herojourney.model.base.hero.HeroDetails;
+import io.tearstar.herojourney.model.base.hero.HeroPurse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

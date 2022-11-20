@@ -1,6 +1,6 @@
 package io.tearstar.herojourney.service;
 
-import io.tearstar.herojourney.model.base.Hero;
+import io.tearstar.herojourney.model.base.hero.Hero;
 import io.tearstar.herojourney.model.exceptions.AuthException;
 import io.tearstar.herojourney.model.exceptions.DataNotFoundException;
 import io.tearstar.herojourney.model.exceptions.ExceptionMessage;
@@ -10,10 +10,7 @@ import io.tearstar.herojourney.model.user.User;
 import io.tearstar.herojourney.model.user.UserHero;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;

@@ -1,6 +1,6 @@
 package io.tearstar.herojourney.model.user;
 
-import io.tearstar.herojourney.model.base.Hero;
+import io.tearstar.herojourney.model.base.hero.Hero;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

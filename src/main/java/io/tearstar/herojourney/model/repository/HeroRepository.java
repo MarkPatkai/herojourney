@@ -1,6 +1,6 @@
 package io.tearstar.herojourney.model.repository;
 
-import io.tearstar.herojourney.model.base.Hero;
+import io.tearstar.herojourney.model.base.hero.Hero;
 import io.tearstar.herojourney.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,7 +1,7 @@
 package io.tearstar.herojourney.controller;
 
-import io.tearstar.herojourney.model.base.Hero;
-import io.tearstar.herojourney.model.base.HeroClass;
+import io.tearstar.herojourney.model.base.hero.Hero;
+import io.tearstar.herojourney.model.base.hero.HeroClass;
 import io.tearstar.herojourney.model.exceptions.AuthException;
 import io.tearstar.herojourney.model.exceptions.ExceptionMessage;
 import io.tearstar.herojourney.model.user.User;

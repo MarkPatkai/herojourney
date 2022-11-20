@@ -21,6 +21,11 @@ const routes = [
     path: '/game/profile',
     name: 'profile',
     component: () => import(/* webpackChunkName: "about" */ '../views/HeroProfileView.vue')
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AdminView.vue')
   }
 ]
 

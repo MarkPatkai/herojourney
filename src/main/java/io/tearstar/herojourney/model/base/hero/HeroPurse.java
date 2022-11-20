@@ -1,4 +1,4 @@
-package io.tearstar.herojourney.model.base;
+package io.tearstar.herojourney.model.base.hero;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +25,7 @@ public class HeroPurse {
 
     private int heavenCoin;
 
-    @OneToOne(mappedBy = "hero_id")
+    @OneToOne
+    @JoinColumn(name = "hero_id")
     private Hero owner;
 }

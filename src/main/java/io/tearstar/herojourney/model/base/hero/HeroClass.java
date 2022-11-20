@@ -1,4 +1,4 @@
-package io.tearstar.herojourney.model.base;
+package io.tearstar.herojourney.model.base.hero;
 
 import io.tearstar.herojourney.model.core.AbstractAttributeHolder;
 import io.tearstar.herojourney.model.core.AttributeName;

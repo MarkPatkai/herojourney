@@ -1,4 +1,4 @@
-package io.tearstar.herojourney.model.base;
+package io.tearstar.herojourney.model.base.hero;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,18 +8,14 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "HERO_DETAIL")
+@Table(name = "HERO_SPELL")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class HeroDetails {
-
+public class HeroSpell {
+    //TODO: Name, Requirement (stat & value), mod, type
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    //TODO: Inventory (Id list), Resistances (base), Equipment, LearnedSpells (ID list)
-
-
 }

@@ -19,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -57,6 +58,7 @@ public class JwtTokenService extends OncePerRequestFilter {
                 .setSubject(user.getUserId())
                 .setIssuedAt(new Date())
                 .setExpiration(expiryDate)
+                .claim("roles", user.getRole().getAuthorities())
                 .signWith(SignatureAlgorithm.HS256, jwtSecret)
                 .compact();
     }
@@ -116,7 +118,7 @@ public class JwtTokenService extends OncePerRequestFilter {
                 authentication = new UsernamePasswordAuthenticationToken(
                 usr, null,
                 usr == null ?
-                        Collections.emptyList() : null
+                        Collections.emptyList() : usr.getRole().getAuthorities()
         );
 
 

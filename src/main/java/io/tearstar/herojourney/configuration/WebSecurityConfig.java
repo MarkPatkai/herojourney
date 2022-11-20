@@ -42,6 +42,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         })).and();
 
         http.authorizeHttpRequests()
+                .antMatchers("/HeroJourney/developer/**")
+                        .hasAnyAuthority("ROLE_DEVELOPER", "ROLE_ADMIN", "ROLE_SUPER_ADMIN")
+                .antMatchers("/HeroJourney/admin/**")
+                        .hasAnyAuthority("ROLE_ADMIN", "ROLE_SUPER_ADMIN")
                 .anyRequest().permitAll();
 
         http.addFilterBefore(
