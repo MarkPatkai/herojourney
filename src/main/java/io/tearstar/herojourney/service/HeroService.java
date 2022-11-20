@@ -2,7 +2,10 @@ package io.tearstar.herojourney.service;
 
 import io.tearstar.herojourney.model.base.hero.Hero;
 import io.tearstar.herojourney.model.base.hero.HeroClass;
+import io.tearstar.herojourney.model.base.hero.HeroPurse;
+import io.tearstar.herojourney.model.exceptions.DataNotFoundException;
 import io.tearstar.herojourney.model.repository.HeroClassRepository;
+import io.tearstar.herojourney.model.repository.HeroPurseRepository;
 import io.tearstar.herojourney.model.repository.HeroRepository;
 import io.tearstar.herojourney.model.user.User;
 import lombok.NonNull;
@@ -22,11 +25,14 @@ public class HeroService {
     private HeroRepository heroRepository;
     private UserService userService;
 
+    private HeroPurseRepository heroPurseRepository;
     private HeroClassRepository heroClassRepository;
 
-    public HeroService(HeroRepository heroRepository, UserService userService, HeroClassRepository heroClassRepository) {
+    public HeroService(HeroRepository heroRepository, UserService userService,
+                       HeroPurseRepository heroPurseRepository, HeroClassRepository heroClassRepository) {
         this.heroRepository = heroRepository;
         this.userService = userService;
+        this.heroPurseRepository = heroPurseRepository;
         this.heroClassRepository = heroClassRepository;
     }
 
@@ -50,5 +56,15 @@ public class HeroService {
 
     public List<HeroClass> getHeroClasses() {
         return heroClassRepository.findAll();
+    }
+
+    public HeroPurse getHeroPurse(@NonNull Long heroId) throws DataNotFoundException {
+        Hero hero = heroRepository.findById(heroId).orElseThrow(() -> new DataNotFoundException(heroId.toString()));
+        HeroPurse purse = heroPurseRepository.findByOwner(hero);
+        if(purse == null) {
+            purse = new HeroPurse();
+        }
+        purse.setOwner(hero);
+        return heroPurseRepository.save(purse);
     }
 }

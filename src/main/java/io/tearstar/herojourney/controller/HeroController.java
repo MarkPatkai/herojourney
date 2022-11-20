@@ -2,7 +2,9 @@ package io.tearstar.herojourney.controller;
 
 import io.tearstar.herojourney.model.base.hero.Hero;
 import io.tearstar.herojourney.model.base.hero.HeroClass;
+import io.tearstar.herojourney.model.base.hero.HeroPurse;
 import io.tearstar.herojourney.model.exceptions.AuthException;
+import io.tearstar.herojourney.model.exceptions.DataNotFoundException;
 import io.tearstar.herojourney.model.exceptions.ExceptionMessage;
 import io.tearstar.herojourney.model.user.User;
 import io.tearstar.herojourney.service.HeroService;
@@ -49,10 +51,27 @@ public class HeroController {
         return heroService.getHeroClasses();
     }
 
+    @GetMapping("/hero_purse")
+    private HeroPurse getHeroPurse(@RequestParam("hero_id") Long hero) throws DataNotFoundException {
+        log.info("Get purse of heroId: {}", hero);
+        return heroService.getHeroPurse(hero);
+    }
+
     @ExceptionHandler(AuthException.class)
     @ResponseBody
     public String handleAuthException(AuthException e) {
         log.error("AuthException: {}", e.getMessage());
+        return ExceptionMessage.builder()
+                .errorMsg(e.getMessage())
+                .exception(e)
+                .build()
+                .toString();
+    }
+
+    @ExceptionHandler(DataNotFoundException.class)
+    @ResponseBody
+    public String handleDataNotFoundException(DataNotFoundException e) {
+        log.error("DataNotFoundException: {}", e.getMessage());
         return ExceptionMessage.builder()
                 .errorMsg(e.getMessage())
                 .exception(e)

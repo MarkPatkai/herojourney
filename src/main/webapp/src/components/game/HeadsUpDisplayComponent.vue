@@ -1,10 +1,14 @@
 <template>
-  <div></div>
+  <div>
+    <CurrencyComponent />
+  </div>
 </template>
 
 <script>
+import CurrencyComponent from "@/components/game/CurrencyComponent";
 export default {
-  name: "HeadsUpDisplayComponent"
+  name: "HeadsUpDisplayComponent",
+  components: {CurrencyComponent}
 }
 </script>
 

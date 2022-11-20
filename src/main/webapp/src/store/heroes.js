@@ -1,4 +1,4 @@
-// vuex store module
+    // vuex store module
 import http from "@/http/http";
 
 
@@ -8,11 +8,13 @@ export default {
         heroes: [],
         hero_classes: [],
         hero: {},
+        hero_purse: {}
     },
     getters: {
         getHeroes: (state) => state.heroes,
         getHeroClasses: (state) => state.hero_classes,
         getHero: (state) => state.hero,
+        getHeroPurse: (state) => state.hero_purse,
     },
     mutations: {
         setHeroes(state, heroes) {
@@ -26,6 +28,9 @@ export default {
         },
         setHero(state, hero) {
             state.hero = hero
+        },
+        setHeroPurse(state, hero_purse) {
+            state.hero_purse = hero_purse
         }
     },
     actions: {
@@ -62,6 +67,20 @@ export default {
         },
         selectHero({commit}, hero) {
             commit('setHero', hero)
+        },
+        async fetchHeroPurse({commit}, hero) {
+            await http.get('/HeroJourney/hero/hero_purse/', {
+                params: {
+                    hero_id: hero.id
+                }
+            })
+                    .then(response => {
+                        const purse = response.data;
+                        commit('setHeroPurse', purse)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
         }
     }
 }
