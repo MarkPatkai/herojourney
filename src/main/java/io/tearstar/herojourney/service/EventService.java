@@ -2,12 +2,16 @@ package io.tearstar.herojourney.service;
 
 import io.tearstar.herojourney.model.base.event.EventBase;
 import io.tearstar.herojourney.model.exceptions.EventNotFoundException;
-import io.tearstar.herojourney.model.repository.*;
+import io.tearstar.herojourney.model.repository.event.*;
 import io.tearstar.herojourney.model.request.EventBuilderRequest;
 import io.tearstar.herojourney.model.response.EventEssentialsResponse;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -46,5 +50,13 @@ public class EventService {
 
     public EventEssentialsResponse processEventBuilderRequest(EventBuilderRequest request) {
         throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    public List<EventEssentialsResponse> getEvents() {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    public List<String> getEventHeaders() {
+        return Arrays.stream(EventBase.class.getDeclaredFields()).map(Field::getName).toList();
     }
 }

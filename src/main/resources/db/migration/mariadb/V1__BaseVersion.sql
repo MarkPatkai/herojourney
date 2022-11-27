@@ -45,13 +45,19 @@ create table hero_detail (
     id bigint not null auto_increment primary key
 );
 
-create table hero_spell (
-    id bigint not null auto_increment primary key
+create table spell_type (
+    id bigint not null auto_increment primary key,
+    name varchar(255) not null
 );
 
-create table spell_type (
-    id bigint not null auto_increment primary key
+create table hero_spell (
+    id bigint not null auto_increment primary key,
+    name varchar(255) not null,
+    spell_type_id bigint not null,
+    constraint `fk_spell_type` foreign key (spell_type_id) references spell_type(id)
 );
+
+
 
 create table user_hero (
     id bigint not null auto_increment primary key,

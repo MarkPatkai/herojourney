@@ -1,4 +1,4 @@
-package io.tearstar.herojourney.model.repository;
+package io.tearstar.herojourney.model.repository.event;
 
 import io.tearstar.herojourney.model.base.event.EventFight;
 import io.tearstar.herojourney.model.base.event.EventFightEnemies;

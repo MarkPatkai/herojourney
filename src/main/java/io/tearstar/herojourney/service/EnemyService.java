@@ -1,7 +1,7 @@
 package io.tearstar.herojourney.service;
 
 import io.tearstar.herojourney.model.base.enemy.EnemyBase;
-import io.tearstar.herojourney.model.repository.EnemyBaseRepository;
+import io.tearstar.herojourney.model.repository.event.EnemyBaseRepository;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

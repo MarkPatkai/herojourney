@@ -8,14 +8,17 @@
         <router-view />
       </div>
     </div>
+    <Toast />
   </div>
 </template>
 <script>
 import MainMenu from "@/components/menu/MainMenu";
+import Toast from "primevue/toast";
 export default {
   name: "App",
   components: {
     MainMenu,
+    Toast,
   },
 };
 </script>

@@ -1,4 +1,4 @@
-package io.tearstar.herojourney.model.repository;
+package io.tearstar.herojourney.model.repository.hero;
 
 import io.tearstar.herojourney.model.base.hero.Hero;
 import io.tearstar.herojourney.model.base.hero.HeroPurse;

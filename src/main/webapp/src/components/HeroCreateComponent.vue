@@ -11,12 +11,13 @@
 <script>
 import Dropdown from "primevue/dropdown";
 import InputText from "primevue/inputtext";
-
+import Button from "primevue/button";
 export default {
   name: "HeroCreateComponent",
   components: {
     InputText,
     Dropdown,
+    Button,
   },
   data() {
     return {
