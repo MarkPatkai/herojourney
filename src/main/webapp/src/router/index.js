@@ -36,6 +36,11 @@ const routes = [
     path: '/admin/dev/enemy',
     name: 'enemy',
     component: () => import(/* webpackChunkName: "about" */ '../views/AdminView.vue')
+  },
+  {
+  path: '/admin/dev/spelltype',
+  name: 'spelltype',
+  component: () => import(/* webpackChunkName: "about" */ '../views/AdminView.vue')
   }
 ]
 

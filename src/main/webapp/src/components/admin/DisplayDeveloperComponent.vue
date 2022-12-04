@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <DataTable>
+  <div v-if="cols">
+    <DataTable :value="data">
       <template #header>
         <div class="table-header">
           {{ title }}
@@ -9,28 +9,30 @@
       </template>
       <Column class="uppercase" v-for="col in cols" :field="col.name"
               :header="col.name" :key="col.name">
-        <Row v-for="row in data" :key="row.id">
-          <InputText v-if="col.editable" v-model="row[col.name]" />
-        </Row>
+          <div>
+            <span v-if="col.complex">
+              {{ data[col.name].name }}
+            </span>
+            <span v-else>
+              {{ data[col.name] }}
+            </span>
+          </div>
       </Column>
     </DataTable>
-    <AddItemComponent @close="showAddItem = false" v-model:visible="showAddItem"/>
+    <AddItemComponent />
   </div>
 </template>
 
 <script>
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
-import Row from 'primevue/row';
-import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import AddItemComponent from "@/components/admin/AddItemComponent";
 export default {
   name: "DisplayDeveloperComponent",
-  components: {AddItemComponent, DataTable, Column, Row, InputText, Button},
+  components: {AddItemComponent, DataTable, Column, Button},
   data() {
     return {
-      showAddItem: false,
     }
   },
   computed: {
@@ -46,7 +48,8 @@ export default {
   },
   methods: {
     addItem() {
-      this.showAddItem = true;
+      debugger
+      this.$store.dispatch("openDialog");
     },
   },
 }

@@ -17,6 +17,8 @@ export default {
       this.$store.dispatch("fetchSpellData");
      if (to.path === "/admin/dev/enemy")
       this.$store.dispatch("fetchEnemyData");
+     if (to.path === "/admin/dev/spelltype")
+      this.$store.dispatch("fetchSpellTypeData");
     },
   },
 

@@ -1,4 +1,4 @@
-package io.tearstar.herojourney.model.base;
+package io.tearstar.herojourney.model.base.spell;
 
 import io.tearstar.herojourney.model.core.DeveloperField;
 import lombok.AllArgsConstructor;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "HERO_SPELL")
+@Table(name = "SPELL_TYPE")
 @Data
 @Builder
 @NoArgsConstructor
@@ -26,4 +26,10 @@ public class SpellType {
 
     @DeveloperField(field = "name", required = true)
     private String name;
+
+    @DeveloperField(field = "resistedBy", required = true, complex = true)
+    @ManyToOne
+    @JoinColumn(name = "resistance_type_id")
+    private ResistenceType resistedBy;
+
 }

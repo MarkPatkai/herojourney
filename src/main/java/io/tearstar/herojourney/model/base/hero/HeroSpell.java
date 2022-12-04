@@ -1,6 +1,6 @@
 package io.tearstar.herojourney.model.base.hero;
 
-import io.tearstar.herojourney.model.base.SpellType;
+import io.tearstar.herojourney.model.base.spell.SpellType;
 import io.tearstar.herojourney.model.core.DeveloperField;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

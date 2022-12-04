@@ -2,6 +2,7 @@ package io.tearstar.herojourney.controller;
 
 import io.tearstar.herojourney.model.base.enemy.EnemyBase;
 import io.tearstar.herojourney.model.base.hero.HeroSpell;
+import io.tearstar.herojourney.model.base.spell.SpellType;
 import io.tearstar.herojourney.model.core.GameObjectField;
 import io.tearstar.herojourney.model.request.EventBuilderRequest;
 import io.tearstar.herojourney.model.response.EventEssentialsResponse;
@@ -80,4 +81,12 @@ public class DeveloperController {
         return developerService.getHeroSpellsMap();
     }
 
+    @GetMapping("/spellType/headers")
+    public List<GameObjectField> getSpellTypeHeaders() {
+        return developerService.getSpellTypeMap();
+    }
+    @GetMapping("/spellType")
+    public List<SpellType> getSpellType() {
+        return developerService.getSpellTypes();
+    }
 }

@@ -26,6 +26,7 @@ public class HeaderService {
                        .editable(true)
                        .required(false)
                        .complex(false)
+
                        .helpText("")
                        .build());
             } else {

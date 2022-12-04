@@ -16,6 +16,4 @@ public class GameObjectField {
     private boolean required;
     private boolean complex;
     private String helpText;
-
-
 }

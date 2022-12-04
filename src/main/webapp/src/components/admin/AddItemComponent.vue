@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Dialog v-model:visible="display">
+    <Dialog v-model:visible="display" @update:visible="hideHandler">
       <template #header>
         <h3>Create {{ title }}</h3>
       </template>
@@ -8,7 +8,7 @@
       <div class="grid">
         <div class="col" v-for="col in cols" :key="col.name" >
         <span class="p-input-icon-left p-input-icon-right" v-if="col.editable">
-            <InputText :id="col.name" v-model="col.value" v-if="!col.complex" />
+            <InputText :id="col.name" v-if="!col.complex" />
             <label class="uppercase" :for="col.name">{{ col.name }}</label>
         </span>
         </div>
@@ -31,16 +31,16 @@ import ConfirmDialog from 'primevue/confirmdialog';
 export default {
   name: "AddItemComponent",
   components: {Dialog, InputText, Button, ConfirmDialog},
-  data() {
-    return {
-    }
-  },
+  props: ["item"],
   computed:  {
     cols() {
       return this.$store.getters.getCols.filter(col => col.editable);
     },
     title() {
       return this.$store.getters.getTitle;
+    },
+    display() {
+      return this.$store.getters.getDisplay;
     },
   },
   methods: {
@@ -51,7 +51,7 @@ export default {
         header: 'Confirmation',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
-          this.$emit('close');
+          this.$store.dispatch("openDialog");
         },
         reject: () => {
           // do nothing
@@ -65,14 +65,26 @@ export default {
         header: 'Confirmation',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
-         // this.$store.dispatch("saveItem", this.cols);
-          this.$emit('close');
+          this.$store.dispatch("saveItem", this.cols);
         },
         reject: () => {
           // do nothing
         }
       });
-    }
+    },
+    hideHandler() {
+      this.$confirm.require({
+        message: 'Are you sure you want to cancel?',
+        header: 'Confirmation',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          this.$store.dispatch("openDialog");
+        },
+        reject: () => {
+          // do nothing
+        }
+      });
+    },
   },
 
 }

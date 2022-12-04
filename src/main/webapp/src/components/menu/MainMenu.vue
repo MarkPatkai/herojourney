@@ -76,6 +76,13 @@ export default {
               command: () => {
                 this.$router.push("/admin/dev/enemy");
               },
+            },
+            {
+              label: "Spell Type",
+              icon: "pi pi-fw pi-cog",
+              command: () => {
+                this.$router.push("/admin/dev/spelltype");
+              },
             }
           ]
         }

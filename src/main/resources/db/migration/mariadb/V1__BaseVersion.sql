@@ -3,10 +3,6 @@ create table user_role(
     name varchar(255) not null
 );
 
-insert into user_role (id, name) values (1,'ROLE_USER');
-insert into user_role (id, name) values (2,'ROLE_ADMIN');
-insert into user_role (id, name) values (3,'ROLE_SUPER_ADMIN');
-insert into user_role (id, name) values (4,'ROLE_DEVELOPER');
 
 create table user (
     id bigint not null auto_increment primary key,
@@ -45,10 +41,19 @@ create table hero_detail (
     id bigint not null auto_increment primary key
 );
 
+create table resistance_type (
+     id bigint not null auto_increment primary key,
+     name varchar(255) not null
+);
+
+
 create table spell_type (
     id bigint not null auto_increment primary key,
-    name varchar(255) not null
+    name varchar(255) not null,
+    resistance_type_id bigint not null,
+    constraint `fk_resistance_type` foreign key (resistance_type_id) references resistance_type(id)
 );
+
 
 create table hero_spell (
     id bigint not null auto_increment primary key,
@@ -88,10 +93,6 @@ create table event_conversation_participant(
     name varchar(255) not null
 );
 
-insert into event_conversation_participant (name) values ('HERO');
-insert into event_conversation_participant (name) values ('NPC');
-insert into event_conversation_participant (name) values ('NARRATOR');
-
 create table event_conversation (
   id bigint not null auto_increment primary key,
   event_base_id bigint not null,
@@ -126,17 +127,4 @@ create table event_fight_enemies (
     constraint `fk_enemy_base_e` foreign key (enemy_base_id) references enemy_base(id)
 );
 
-insert into user (user_id, password, salt, user_role_id)
-values ('test', '$2a$10$t5E0Y56ITsUGWjHKVIgcFOS0AiLCW6upUkSOp/DtXq4gLHf/X/NAO', '$2a$10$t5E0Y56ITsUGWjHKVIgcFO', 3);
 
-insert into hero_class (name, mnd, str, dex, vit)
-values ('Warrior', 5, 10, 5, 5);
-
-insert into hero_class (name, mnd, str, dex, vit)
-value ('Mage', 10, 5, 5, 5);
-
-insert into hero_class (name, mnd, str, dex, vit)
-values ('Rogue', 5, 5, 10, 5);
-
-insert into hero_class (name, mnd, str, dex, vit)
-values ('Paladin', 5, 5, 5, 10);

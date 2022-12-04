@@ -4,6 +4,7 @@ export default {
         hero_selection: true,
         hero_creation: false,
         login_screen: false,
+        modalDisplay: false,
     },
     getters: {
         getHeroSelection: (state) => state.hero_selection,
@@ -11,6 +12,8 @@ export default {
         isGameView: (state) => state.hero_selection === false
             && state.hero_creation === false
             && state.login_screen === false,
+        getLoginScreen: (state) => state.login_screen,
+        getDisplay: (state) => state.modalDisplay,
 
     },
     mutations: {
@@ -22,6 +25,9 @@ export default {
         },
         setLoginScreen(state, login_screen) {
             state.login_screen = login_screen
+        },
+        toggleModalDisplay(state) {
+            state.modalDisplay = !state.modalDisplay
         }
     },
     actions: {
@@ -33,6 +39,9 @@ export default {
         },
         login_screen({commit}, login_screen) {
             commit('setLoginScreen', login_screen)
+        },
+        openDialog({commit}) {
+            commit('toggleModalDisplay')
         }
     }
 }
