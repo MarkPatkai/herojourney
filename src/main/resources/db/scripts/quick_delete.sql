@@ -1,0 +1,9 @@
+drop table if exists heroes;
+drop table if exists hero_details;
+drop table if exists user;
+drop table if exists hero_class;
+drop table if exists hero_spell;
+drop table if exists spell_type;
+drop table if exists user_hero;
+drop table if exists user_purse;
+drop table if exists flyway_schema_history;
